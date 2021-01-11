@@ -19,7 +19,7 @@ public class TestPexWrapper {
         public void userRemove() {
                 assertEquals("luckperms user blalp permission unset bukkit.fly",
                                 PexWrapper.translateCommand("user blalp remove bukkit.fly".split(" ")));
-                assertEquals("luckperms user blalp permission unset bukkit.fly false",
+                assertEquals("luckperms user blalp permission unset bukkit.fly",
                                 PexWrapper.translateCommand("user blalp remove -bukkit.fly".split(" ")));
         }
 
@@ -71,9 +71,9 @@ public class TestPexWrapper {
         public void groupRemove() {
                 assertEquals("luckperms group manager permission unset bukkit.fly",
                                 PexWrapper.translateCommand("group manager remove bukkit.fly".split(" ")));
-                assertEquals("luckperms group manager permission unset bukkit.fly false",
+                assertEquals("luckperms group manager permission unset bukkit.fly",
                                 PexWrapper.translateCommand("group manager remove -bukkit.fly".split(" ")));
-                assertEquals("luckperms group admin permission unset bukkit.fly false",
+                assertEquals("luckperms group admin permission unset bukkit.fly",
                                 PexWrapper.translateCommand("group admin remove -bukkit.fly".split(" ")));
         }
 
@@ -99,153 +99,263 @@ public class TestPexWrapper {
 
         @Test
         public void wikiGeneral() {
-                assertEquals("lp", PexWrapper.translateCommand("pex".split(" ")));
-                assertEquals("lp sync", PexWrapper.translateCommand("reload".split(" ")));
-                assertEquals("lp verbose on", PexWrapper.translateCommand("pex toggle debug".split(" ")));
-                assertEquals("lp verbose off", PexWrapper.translateCommand("pex toggle debug".split(" ")));
+                assertEquals("luckperms", PexWrapper.translateCommand(new String[] {}));
+                assertEquals("luckperms sync", PexWrapper.translateCommand("reload".split(" ")));
+                assertEquals("luckperms verbose on", PexWrapper.translateCommand("toggle debug".split(" ")));
+                assertEquals("luckperms verbose off", PexWrapper.translateCommand("toggle debug".split(" ")));
         }
+
         @Test
-        public void wikiUser() {
-                assertEquals("lp user blalp haspermission minecraft.commands.give",
-                                PexWrapper.translateCommand("pex user blalp check minecraft.commands.give".split(" ")));
-                assertEquals("lp user blalp haspermission minecraft.commands.give", PexWrapper
-                                .translateCommand("pex user blalp check -minecraft.commands.give".split(" ")));
-                assertEquals("lp info", PexWrapper.translateCommand("pex backend".split(" ")));
-                assertEquals("lp user blalp permission info",
-                                PexWrapper.translateCommand("pex user blalp list".split(" ")));
-                assertEquals("lp user blalp meta info",
-                                PexWrapper.translateCommand("pex user blalp prefix".split(" ")));
-                assertEquals("lp user blalp meta addprefix 999999 &0r&fa&1d&7p&6r&5e&8f&ci&ax&b", PexWrapper
-                                .translateCommand("pex user blalp prefix &0r&fa&1d&7p&6r&5e&8f&ci&ax&b".split(" ")));
-                assertEquals("lp user blalp meta addprefix 999999 \"Multi Word\"",
-                                PexWrapper.translateCommand("pex user blalp prefix \"Multi Word\"".split(" ")));
-                assertEquals("unknown", PexWrapper.translateCommand("pex user blalp prefix \"\"".split(" ")));
-                assertEquals("lp user blalp meta info",
-                                PexWrapper.translateCommand("pex user blalp suffix".split(" ")));
-                assertEquals("lp user blalp meta addsuffix 999999 &0s&fu&0f&0f&0f&ff&0i&fx&0", PexWrapper
-                                .translateCommand("pex user blalp suffix &0s&fu&0f&0f&0f&ff&0i&fx&0".split(" ")));
-                assertEquals("unknown", PexWrapper.translateCommand("pex user blalp suffix \"\"".split(" ")));
-                assertEquals("lp user blalp meta addsuffix 999999 \"Multi Word\"",
-                                PexWrapper.translateCommand("pex user blalp suffix \"Multi Word\"".split(" ")));
-                assertEquals("lp user blalp clear", PexWrapper.translateCommand("pex user blalp delete".split(" ")));
-                assertEquals("lp user blalp permission set minecraft.commands.give true world=MyWorld", PexWrapper
-                                .translateCommand("pex user blalp add minecraft.commands.give MyWorld".split(" ")));
-                assertEquals("lp user blalp permission set minecraft.commands.give true world=world", PexWrapper
-                                .translateCommand("pex user blalp add minecraft.commands.give world".split(" ")));
-                assertEquals("lp user blalp permission set minecraft.commands.give false world=MyWorld", PexWrapper
-                                .translateCommand("pex user blalp add -minecraft.commands.give MyWorld".split(" ")));
-                assertEquals("lp user blalp permission unset minecraft.commands.give world=MyWorld", PexWrapper
-                                .translateCommand("pex user blalp remove minecraft.commands.give MyWorld".split(" ")));
-                assertEquals("lp user blalp permission unset minecraft.commands.give world=MyWorld", PexWrapper
-                                .translateCommand("pex user blalp remove -minecraft.commands.give MyWorld".split(" ")));
-                assertEquals("lp user blalp permission settemp minecraft.commands.give true 1mo3d13h45m world=MyWorld",
-                                PexWrapper.translateCommand(
-                                                "pex user blalp timed add minecraft.commands.give 1mo3d13h45m MyWorld"
-                                                                .split(" ")));
-                assertEquals("lp user blalp permission settemp minecraft.commands.give true 1482694200 world=MyWorld",
-                                PexWrapper.translateCommand(
-                                                "pex user blalp timed add minecraft.commands.give 1482694200 MyWorld"
-                                                                .split(" ")));
-                assertEquals("lp user blalp permission settemp minecraft.commands.give false 1mo3d13h45m world=MyWorld",
-                                PexWrapper.translateCommand(
-                                                "pex user blalp timed add -minecraft.commands.give 1mo3d13h45m MyWorld"
-                                                                .split(" ")));
-                assertEquals("lp user blalp permission unsettemp minecraft.commands.give world=MyWorld",
-                                PexWrapper.translateCommand(
-                                                "pex user blalp timed remove -minecraft.commands.give 1mo3d13h45m MyWorld"
-                                                                .split(" ")));
-                assertEquals("lp user blalp permission unsettemp minecraft.commands.give world=MyWorld",
-                                PexWrapper.translateCommand(
-                                                "pex user blalp timed remove minecraft.commands.give 1mo3d13h45m MyWorld"
-                                                                .split(" ")));
-                assertEquals("lp user blalp meta set option value world=MyWorld",
-                                PexWrapper.translateCommand("pex user blalp set option value MyWorld".split(" ")));
-                assertEquals("lp user blalp meta set option2 value2 world=MyWorld",
-                                PexWrapper.translateCommand("pex user blalp set option2 value2 MyWorld".split(" ")));
-                assertEquals("lp user blalp parent info",
-                                PexWrapper.translateCommand("pex user blalp group list".split(" ")));
-                assertEquals("lp user blalp parent add admin world=MyWorld",
-                                PexWrapper.translateCommand("pex user blalp group add admin MyWorld".split(" ")));
-                assertEquals("lp user blalp parent addtemp admin 1mo3d13h45m world=MyWorld", PexWrapper
-                                .translateCommand("pex user blalp group add admin MyWorld 1mo3d13h45m".split(" ")));
-                assertEquals("lp user blalp parent set admin",
-                                PexWrapper.translateCommand("pex user blalp group set admin".split(" ")));
-                assertEquals("lp user blalp parent remove admin world=MyWorld",
-                                PexWrapper.translateCommand("pex user blalp group remove admin MyWorld".split(" ")));
+        public void wikiUserInfo() {
+                assertEquals("luckperms user blalp haspermission minecraft.commands.give",
+                                PexWrapper.translateCommand("user blalp check minecraft.commands.give".split(" ")));
+                assertEquals("luckperms info", PexWrapper.translateCommand("backend".split(" ")));
+                assertEquals("luckperms user blalp permission info",
+                                PexWrapper.translateCommand("user blalp list".split(" ")));
         }
+
+        @Test
+        public void wikiUserPrefix() {
+                assertEquals("luckperms user blalp meta info",
+                                PexWrapper.translateCommand("user blalp prefix".split(" ")));
+                assertEquals("luckperms user blalp meta setprefix 999999 &0r&fa&1d&7p&6r&5e&8f&ci&ax&b", PexWrapper
+                                .translateCommand("user blalp prefix &0r&fa&1d&7p&6r&5e&8f&ci&ax&b".split(" ")));
+                assertEquals("luckperms user blalp meta setprefix 999999 \"Multi Word\"",
+                                PexWrapper.translateCommand("user blalp prefix \"Multi Word\"".split(" ")));
+                assertEquals("luckperms user blalp meta setprefix 999999 \"\"\nluckperms user blalp meta removeprefix 999999 \"\"",
+                                PexWrapper.translateCommand("user blalp prefix \"\"".split(" ")));
+        }
+
+        @Test
+        public void wikiUserSuffix() {
+                assertEquals("luckperms user blalp meta info",
+                                PexWrapper.translateCommand("user blalp suffix".split(" ")));
+                assertEquals("luckperms user blalp meta setsuffix 999999 &0s&fu&0f&0f&0f&ff&0i&fx&0",
+                                PexWrapper.translateCommand("user blalp suffix &0s&fu&0f&0f&0f&ff&0i&fx&0".split(" ")));
+                assertEquals("luckperms user blalp meta setsuffix 999999 \"\"\nluckperms user blalp meta removesuffix 999999 \"\"",
+                                PexWrapper.translateCommand("user blalp suffix \"\"".split(" ")));
+                assertEquals("luckperms user blalp meta setsuffix 999999 \"Multi Word\"",
+                                PexWrapper.translateCommand("user blalp suffix \"Multi Word\"".split(" ")));
+        }
+
+        @Test
+        public void wikiUserPermissions() {
+                assertEquals("luckperms user blalp clear", PexWrapper.translateCommand("user blalp delete".split(" ")));
+        }
+
+        @Test
+        public void wikiUserPermissionsAdd() {
+                assertEquals("luckperms user blalp permission set minecraft.commands.give world=MyWorld", PexWrapper
+                                .translateCommand("user blalp add minecraft.commands.give MyWorld".split(" ")));
+                assertEquals("luckperms user blalp permission set minecraft.commands.give",
+                                PexWrapper.translateCommand("user blalp add minecraft.commands.give".split(" ")));
+                assertEquals("luckperms user blalp permission set minecraft.commands.give world=world",
+                                PexWrapper.translateCommand("user blalp add minecraft.commands.give world".split(" ")));
+                assertEquals("luckperms user blalp permission set minecraft.commands.give false world=MyWorld",
+                                PexWrapper.translateCommand(
+                                                "user blalp add -minecraft.commands.give MyWorld".split(" ")));
+                assertEquals("luckperms user blalp permission set minecraft.commands.give false",
+                                PexWrapper.translateCommand("user blalp add -minecraft.commands.give".split(" ")));
+        }
+
+        @Test
+        public void wikiUserPermissionsRemove() {
+                assertEquals("luckperms user blalp permission unset minecraft.commands.give world=MyWorld", PexWrapper
+                                .translateCommand("user blalp remove minecraft.commands.give MyWorld".split(" ")));
+                assertEquals("luckperms user blalp permission unset minecraft.commands.give",
+                                PexWrapper.translateCommand("user blalp remove minecraft.commands.give".split(" ")));
+                assertEquals("luckperms user blalp permission unset minecraft.commands.give world=MyWorld", PexWrapper
+                                .translateCommand("user blalp remove -minecraft.commands.give MyWorld".split(" ")));
+                assertEquals("luckperms user blalp permission unset minecraft.commands.give",
+                                PexWrapper.translateCommand("user blalp remove -minecraft.commands.give".split(" ")));
+        }
+
+        @Test
+        public void wikiUserTimedPermissionsAdd() {
+                assertEquals("luckperms user blalp permission settemp minecraft.commands.give 3d13h45m world=MyWorld",
+                                PexWrapper.translateCommand(
+                                                "user blalp timed add minecraft.commands.give 3d13h45m MyWorld"
+                                                                .split(" ")));
+                assertEquals("luckperms user blalp permission settemp minecraft.commands.give 3d13h45m", PexWrapper
+                                .translateCommand("user blalp timed add minecraft.commands.give 3d13h45m".split(" ")));
+                assertEquals("luckperms user blalp permission settemp minecraft.commands.give 10000s world=MyWorld",
+                                PexWrapper.translateCommand("user blalp timed add minecraft.commands.give 10000 MyWorld"
+                                                .split(" ")));
+                assertEquals("luckperms user blalp permission settemp minecraft.commands.give 1000s", PexWrapper
+                                .translateCommand("user blalp timed add minecraft.commands.give 1000".split(" ")));
+                assertEquals("luckperms user blalp permission settemp minecraft.commands.give false 3d13h45m world=MyWorld",
+                                PexWrapper.translateCommand(
+                                                "user blalp timed add -minecraft.commands.give 3d13h45m MyWorld"
+                                                                .split(" ")));
+                assertEquals("luckperms user blalp permission settemp minecraft.commands.give false 3d13h45m",
+                                PexWrapper.translateCommand(
+                                                "user blalp timed add -minecraft.commands.give 3d13h45m".split(" ")));
+        }
+
+        @Test
+        public void wikiUserTimedPermissionsRemove() {
+
+                assertEquals("luckperms user blalp permission unsettemp minecraft.commands.give world=MyWorld",
+                                PexWrapper.translateCommand(
+                                                "user blalp timed remove -minecraft.commands.give 3d13h45m MyWorld"
+                                                                .split(" ")));
+                assertEquals("luckperms user blalp permission unsettemp minecraft.commands.give",
+                                PexWrapper.translateCommand("user blalp timed remove -minecraft.commands.give 3d13h45m"
+                                                .split(" ")));
+                assertEquals("luckperms user blalp permission unsettemp minecraft.commands.give world=MyWorld",
+                                PexWrapper.translateCommand(
+                                                "user blalp timed remove minecraft.commands.give 3d13h45m MyWorld"
+                                                                .split(" ")));
+                assertEquals("luckperms user blalp permission unsettemp minecraft.commands.give",
+                                PexWrapper.translateCommand(
+                                                "user blalp timed remove minecraft.commands.give 3d13h45m".split(" ")));
+        }
+
+        @Test
+        public void wikiUserMeta() {
+                assertEquals("luckperms user blalp meta set option value world=MyWorld",
+                                PexWrapper.translateCommand("user blalp set option value MyWorld".split(" ")));
+                assertEquals("luckperms user blalp meta set option value",
+                                PexWrapper.translateCommand("user blalp set option value".split(" ")));
+                assertEquals("luckperms user blalp meta set option2 value2 world=MyWorld",
+                                PexWrapper.translateCommand("user blalp set option2 value2 MyWorld".split(" ")));
+                assertEquals("luckperms user blalp meta set option2 value2",
+                                PexWrapper.translateCommand("user blalp set option2 value2".split(" ")));
+        }
+
+        @Test
+        public void wikiUserParent() {
+                assertEquals("luckperms user blalp parent info",
+                                PexWrapper.translateCommand("user blalp group list".split(" ")));
+                assertEquals("luckperms user blalp parent add admin world=MyWorld",
+                                PexWrapper.translateCommand("user blalp group add admin MyWorld".split(" ")));
+                assertEquals("luckperms user blalp parent add admin",
+                                PexWrapper.translateCommand("user blalp group add admin".split(" ")));
+                assertEquals("luckperms user blalp parent addtemp admin 3d13h45m world=MyWorld",
+                                PexWrapper.translateCommand("user blalp group add admin MyWorld 3d13h45m".split(" ")));
+                assertEquals("luckperms user blalp parent addtemp admin 1000s world=MyWorld",
+                                PexWrapper.translateCommand("user blalp group add admin MyWorld 1000".split(" ")));
+                assertEquals("luckperms user blalp parent set admin",
+                                PexWrapper.translateCommand("user blalp group set admin".split(" ")));
+                assertEquals("luckperms user blalp parent remove admin world=MyWorld",
+                                PexWrapper.translateCommand("user blalp group remove admin MyWorld".split(" ")));
+        }
+
         @Test
         public void wikiGroup() {
-                assertEquals("lp listgroups", PexWrapper.translateCommand("pex groups list".split(" ")));
-                assertEquals("lp group admin permission info",
-                                PexWrapper.translateCommand("pex group admin list".split(" ")));
-                assertEquals("lp group admin meta info",
-                                PexWrapper.translateCommand("pex group admin prefix".split(" ")));
-                assertEquals("lp group admin meta addprefix 999999 &0r&fa&1d&7p&6r&5e&8f&ci&ax&b", PexWrapper
-                                .translateCommand("pex group admin prefix &0r&fa&1d&7p&6r&5e&8f&ci&ax&b".split(" ")));
-                assertEquals("lp group admin meta addprefix 999999 \"Multi Word\"",
-                                PexWrapper.translateCommand("pex group admin prefix \"Multi Word\"".split(" ")));
-                assertEquals("Unknown", PexWrapper.translateCommand("pex group admin prefix \"\"".split(" ")));
-                assertEquals("lp group admin meta info",
-                                PexWrapper.translateCommand("pex group admin suffix".split(" ")));
-                assertEquals("lp group admin meta addsuffix 999999 &0s&fu&0f&0f&0f&ff&0i&fx&0", PexWrapper
-                                .translateCommand("pex group admin suffix &0s&fu&0f&0f&0f&ff&0i&fx&0".split(" ")));
-                assertEquals("unknown", PexWrapper.translateCommand("pex group admin suffix \"\"".split(" ")));
-                assertEquals("lp group admin meta addsuffix 999999 \"Multi Word\"",
-                                PexWrapper.translateCommand("pex group admin suffix \"Multi Word\"".split(" ")));
-                assertEquals("lp creategroup admin", PexWrapper.translateCommand("pex group admin create".split(" ")));
-                assertEquals("lp deletegroup admin", PexWrapper.translateCommand("pex group admin delete".split(" ")));
-                assertEquals("lp group admin parent info",
-                                PexWrapper.translateCommand("pex group admin parents list".split(" ")));
-                assertEquals("lp group admin listmembers",
-                                PexWrapper.translateCommand("pex group admin users".split(" ")));
-                assertEquals("lp group admin parent add admin",
-                                PexWrapper.translateCommand("pex group admin parents set admin".split(" ")));
-                assertEquals("unknown", PexWrapper
-                                .translateCommand("pex group admin parents set JMod,Mod,Manager,Admin>".split(" ")));
-                assertEquals("lp group admin permission set minecraft.commands.give true world=MyWorld", PexWrapper
-                                .translateCommand("pex group admin add minecraft.commands.give MyWorld".split(" ")));
-                assertEquals("lp group admin permission set minecraft.commands.give false world=MyWorld", PexWrapper
-                                .translateCommand("pex group admin add -minecraft.commands.give MyWorld".split(" ")));
-                assertEquals("lp group admin permission unset minecraft.commands.give world=MyWorld", PexWrapper
-                                .translateCommand("pex group admin remove minecraft.commands.give MyWorld".split(" ")));
-                assertEquals("lp group admin permission unset minecraft.commands.give world=MyWorld",
-                                PexWrapper.translateCommand(
-                                                "pex group admin remove -minecraft.commands.give MyWorld".split(" ")));
-                assertEquals("lp group admin permission settemp minecraft.commands.give true 1mo3d13h45m world=MyWorld",
-                                PexWrapper.translateCommand(
-                                                "pex group admin timed add minecraft.commands.give 1mo3d13h45m MyWorld"
-                                                                .split(" ")));
-                assertEquals("lp group admin permission settemp minecraft.commands.give false 1mo3d13h45m world=MyWorld",
-                                PexWrapper.translateCommand(
-                                                "pex group admin timed add -minecraft.commands.give 1mo3d13h45m MyWorld"
-                                                                .split(" ")));
-                assertEquals("lp group admin permission unsettemp minecraft.commands.give world=MyWorld",
-                                PexWrapper.translateCommand(
-                                                "pex group admin timed remove minecraft.commands.give 1mo3d13h45m MyWorld"
-                                                                .split(" ")));
-                assertEquals("lp group admin permission unsettemp minecraft.commands.give world=MyWorld",
-                                PexWrapper.translateCommand(
-                                                "pex group admin timed remove -minecraft.commands.give 1mo3d13h45m MyWorld"
-                                                                .split(" ")));
-                assertEquals("lp group admin meta set option value world=MyWorld",
-                                PexWrapper.translateCommand("pex group admin set option value MyWorld".split(" ")));
-                assertEquals("lp group admin meta set option2 value3 world=MyWorld",
-                                PexWrapper.translateCommand("pex group admin set option2 value3 MyWorld".split(" ")));
+                assertEquals("luckperms listgroups", PexWrapper.translateCommand("groups list".split(" ")));
+                assertEquals("luckperms group admin permission info",
+                                PexWrapper.translateCommand("group admin list".split(" ")));
         }
+
+        @Test
+        public void wikiGroupPrefix() {
+                assertEquals("luckperms group admin meta info",
+                                PexWrapper.translateCommand("group admin prefix".split(" ")));
+                assertEquals("luckperms group admin meta setprefix 999999 &0r&fa&1d&7p&6r&5e&8f&ci&ax&b", PexWrapper
+                                .translateCommand("group admin prefix &0r&fa&1d&7p&6r&5e&8f&ci&ax&b".split(" ")));
+                assertEquals("luckperms group admin meta setprefix 999999 \"Multi Word\"",
+                                PexWrapper.translateCommand("group admin prefix \"Multi Word\"".split(" ")));
+                assertEquals("luckperms group admin meta setprefix 999999 \"\"\nluckperms group admin meta removeprefix 999999 \"\"",
+                                PexWrapper.translateCommand("group admin prefix \"\"".split(" ")));
+        }
+
+        @Test
+        public void wikiGroupSuffix() {
+                assertEquals("luckperms group admin meta info",
+                                PexWrapper.translateCommand("group admin suffix".split(" ")));
+                assertEquals("luckperms group admin meta setsuffix 999999 &0s&fu&0f&0f&0f&ff&0i&fx&0", PexWrapper
+                                .translateCommand("group admin suffix &0s&fu&0f&0f&0f&ff&0i&fx&0".split(" ")));
+                assertEquals("luckperms group admin meta setsuffix 999999 \"\"\nluckperms group admin meta removesuffix 999999 \"\"",
+                                PexWrapper.translateCommand("group admin suffix \"\"".split(" ")));
+                assertEquals("luckperms group admin meta setsuffix 999999 \"Multi Word\"",
+                                PexWrapper.translateCommand("group admin suffix \"Multi Word\"".split(" ")));
+        }
+
+        @Test
+        public void wikiGroupCreation() {
+                assertEquals("luckperms creategroup admin",
+                                PexWrapper.translateCommand("group admin create".split(" ")));
+                assertEquals("luckperms deletegroup admin",
+                                PexWrapper.translateCommand("group admin delete".split(" ")));
+        }
+
+        @Test
+        public void wikiGroupParent() {
+                assertEquals("luckperms group admin parent info",
+                                PexWrapper.translateCommand("group admin parents list".split(" ")));
+                assertEquals("luckperms group admin listmembers",
+                                PexWrapper.translateCommand("group admin users".split(" ")));
+                assertEquals("luckperms group admin parent add manager",
+                                PexWrapper.translateCommand("group admin parents set manager".split(" ")));
+                assertEquals("luckperms group admin parent add JMod\nluckperms group admin parent add Mod\nluckperms group admin parent add Manager",
+                                PexWrapper.translateCommand("group admin parents set JMod,Mod,Manager".split(" ")));
+        }
+
+        @Test
+        public void wikiGroupPermissionsAdd() {
+                assertEquals("luckperms group admin permission set minecraft.commands.give world=MyWorld", PexWrapper
+                                .translateCommand("group admin add minecraft.commands.give MyWorld".split(" ")));
+                assertEquals("luckperms group admin permission set minecraft.commands.give false world=MyWorld",
+                                PexWrapper.translateCommand(
+                                                "group admin add -minecraft.commands.give MyWorld".split(" ")));
+        }
+
+        @Test
+        public void wikiGroupPermissionsRemove() {
+                assertEquals("luckperms group admin permission unset minecraft.commands.give world=MyWorld", PexWrapper
+                                .translateCommand("group admin remove minecraft.commands.give MyWorld".split(" ")));
+                assertEquals("luckperms group admin permission unset minecraft.commands.give world=MyWorld", PexWrapper
+                                .translateCommand("group admin remove -minecraft.commands.give MyWorld".split(" ")));
+        }
+
+        @Test
+        public void wikiGroupTimedPermissionsAdd() {
+                assertEquals("luckperms group admin permission settemp minecraft.commands.give 3d13h45m world=MyWorld",
+                                PexWrapper.translateCommand(
+                                                "group admin timed add minecraft.commands.give 3d13h45m MyWorld"
+                                                                .split(" ")));
+                assertEquals("luckperms group admin permission settemp minecraft.commands.give false 3d13h45m world=MyWorld",
+                                PexWrapper.translateCommand(
+                                                "group admin timed add -minecraft.commands.give 3d13h45m MyWorld"
+                                                                .split(" ")));
+        }
+
+        @Test
+        public void wikiGroupTimedPermissionsRemove() {
+                assertEquals("luckperms group admin permission unsettemp minecraft.commands.give world=MyWorld",
+                                PexWrapper.translateCommand(
+                                                "group admin timed remove minecraft.commands.give 3d13h45m MyWorld"
+                                                                .split(" ")));
+                assertEquals("luckperms group admin permission unsettemp minecraft.commands.give world=MyWorld",
+                                PexWrapper.translateCommand(
+                                                "group admin timed remove -minecraft.commands.give 3d13h45m MyWorld"
+                                                                .split(" ")));
+        }
+
+        @Test
+        public void wikiGroupMeta() {
+                assertEquals("luckperms group admin meta set option value world=MyWorld",
+                                PexWrapper.translateCommand("group admin set option value MyWorld".split(" ")));
+                assertEquals("luckperms group admin meta set option2 value3 world=MyWorld",
+                                PexWrapper.translateCommand("group admin set option2 value3 MyWorld".split(" ")));
+        }
+
         @Test
         public void wikiParent() {
-                assertEquals("lp user blalp parent add admin",
-                                PexWrapper.translateCommand("pex group admin user add blalp".split(" ")));
-                assertEquals("lp user blalp parent remove admin",
-                                PexWrapper.translateCommand("pex group admin user remove blalp".split(" ")));
+                assertEquals("luckperms user blalp parent add admin",
+                                PexWrapper.translateCommand("group admin user add blalp".split(" ")));
+                assertEquals("luckperms user blalp parent remove admin",
+                                PexWrapper.translateCommand("group admin user remove blalp".split(" ")));
         }
+
         @Test
         public void wikiLadder() {
-                assertEquals("lp user blalp promote ladder",
-                                PexWrapper.translateCommand("pex promote blalp ladder".split(" ")));
-                assertEquals("lp user blalp promote secondladder>",
-                                PexWrapper.translateCommand("pex promote blalp secondladder".split(" ")));
-                assertEquals("lp user blalp demote ladder",
-                                PexWrapper.translateCommand("pex demote blalp ladder".split(" ")));
+                assertEquals("luckperms user blalp promote ladder",
+                                PexWrapper.translateCommand("promote blalp ladder".split(" ")));
+                assertEquals("luckperms user blalp promote secondladder",
+                                PexWrapper.translateCommand("promote blalp secondladder".split(" ")));
+                assertEquals("luckperms user blalp demote ladder",
+                                PexWrapper.translateCommand("demote blalp ladder".split(" ")));
         }
 }

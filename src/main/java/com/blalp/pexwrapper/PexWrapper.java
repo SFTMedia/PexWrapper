@@ -11,7 +11,7 @@ public class PexWrapper extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		// No need to check for permissions here, as we will be executing the command as the player anyways
-		if(command.getName().equals("pex")) {
+		if(command.getName().equals("permissionsex")) {
 			String lpCommand = "luckperms ";
 			// Now translate the pex command into the luckperms style
 			lpCommand=translateCommand(args);
@@ -23,8 +23,10 @@ public class PexWrapper extends JavaPlugin {
 				return false;
 			}
 			Bukkit.getServer().dispatchCommand(sender, lpCommand);
+			sender.sendMessage("Ran "+lpCommand+" on your behalf.");
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public static String translateCommand(String[] args){

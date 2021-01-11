@@ -32,23 +32,23 @@ public class PexWrapper extends JavaPlugin {
 	public static String translateCommand(String[] args){
 		String output = "luckperms ";
 		// Now translate the pex command into the luckperms style
-		if(args.length>=5) {
-			if(args[1].equals("user")||args[1].equals("group")){
-				if(args[3].equals("add")){
-					output+=args[1]+" "+args[2]+" permission set "+translatePermission(args[4]);
-				} else if (args[3].equals("remove")){
-					output+=args[1]+" "+args[2]+" permission unset "+translatePermission(args[4]);
-				} else if (args[3].equals("prefix")) {
-					output+=args[1]+" "+args[2]+" meta setprefix "+translatePrefix(args, 4);
-				} else if (args[3].equals("suffix")) {
-					output+=args[1]+" "+args[2]+" meta setsuffix "+translatePrefix(args, 4);
-				} else if (args[3].equals("group")&&args[1].equals("user")&&args.length==6) {
-					if(args[4].equals("add")) {
-						output+="user "+args[2]+" parent add "+args[5];
+		if(args.length>=4) {
+			if(args[0].equals("user")||args[0].equals("group")){
+				if(args[2].equals("add")){
+					output+=args[0]+" "+args[1]+" permission set "+translatePermission(args[3]);
+				} else if (args[2].equals("remove")){
+					output+=args[0]+" "+args[1]+" permission unset "+translatePermission(args[3]);
+				} else if (args[2].equals("prefix")) {
+					output+=args[0]+" "+args[1]+" meta setprefix "+translatePrefix(args, 3);
+				} else if (args[2].equals("suffix")) {
+					output+=args[0]+" "+args[1]+" meta setsuffix "+translatePrefix(args, 3);
+				} else if (args[2].equals("group")&&args[0].equals("user")&&args.length==5) {
+					if(args[3].equals("add")) {
+						output+="user "+args[1]+" parent add "+args[4];
 					} else if (args[4].equals("set")) {
-						output+="user "+args[2]+" parent set "+args[5];
-					} else if (args[4].equals("remove")) {
-						output+="user "+args[2]+" parent remove "+args[5];
+						output+="user "+args[1]+" parent set "+args[4];
+					} else if (args[3].equals("remove")) {
+						output+="user "+args[1]+" parent remove "+args[4];
 					}
 				}
 			}

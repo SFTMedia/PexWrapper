@@ -1,6 +1,6 @@
 name: PexWrapper
 main: com.blalp.pexwrapper.PexWrapper
-version: 1.0.2
+version: 1.0.3
 
 commands:
   permissionsex:

@@ -22,7 +22,9 @@ public class PexWrapper extends JavaPlugin {
 						+ " but not valid mapping exists.");
 				return false;
 			}
-			Bukkit.getServer().dispatchCommand(sender, lpCommand);
+			for(String executeCommand:lpCommand.split("\n")){
+				Bukkit.getServer().dispatchCommand(sender, executeCommand);
+			}
 			sender.sendMessage("Ran "+lpCommand+" on your behalf.");
 			return true;
 		}
@@ -39,18 +41,30 @@ public class PexWrapper extends JavaPlugin {
 				} else if (args[2].equals("remove")){
 					output+=args[0]+" "+args[1]+" permission unset "+translatePermission(args[3]);
 				} else if (args[2].equals("prefix")) {
-					output+=args[0]+" "+args[1]+" meta setprefix "+translatePrefix(args, 3);
+					// In order to handle "" properly, we need to set the prefix, then remove it, as we don't know the original priority of the prefix.
+					output+=args[0]+" "+args[1]+" meta setprefix 999999 "+translatePrefix(args, 3);
+					if(args[3].equals("\"\"")){
+						output+="\nluckperms "+args[0]+" "+args[1]+" meta removeprefix 999999 "+translatePrefix(args, 3);
+					}
 				} else if (args[2].equals("suffix")) {
-					output+=args[0]+" "+args[1]+" meta setsuffix "+translatePrefix(args, 3);
+					// In order to handle "" properly, we need to set the prefix, then remove it, as we don't know the original priority of the prefix.
+					output+=args[0]+" "+args[1]+" meta setsuffix 999999 "+translatePrefix(args, 3);
+					if(args[3].equals("\"\"")){
+						output+="\nluckperms "+args[0]+" "+args[1]+" meta removesuffix 999999 "+translatePrefix(args, 3);
+					}
 				} else if (args[2].equals("group")&&args[0].equals("user")&&args.length==5) {
 					if(args[3].equals("add")) {
 						output+="user "+args[1]+" parent add "+args[4];
-					} else if (args[4].equals("set")) {
+					} else if (args[3].equals("set")) {
 						output+="user "+args[1]+" parent set "+args[4];
 					} else if (args[3].equals("remove")) {
 						output+="user "+args[1]+" parent remove "+args[4];
 					}
 				}
+			}
+		} else if(args.length==2){
+			if(args[0].equals("user")||args[0].equals("group")){
+				output+=args[0]+" "+args[1]+" info";
 			}
 		}
 		if (output.equals("luckperms ")){
@@ -61,9 +75,11 @@ public class PexWrapper extends JavaPlugin {
 
 	public static void showHelp(CommandSender sender) {
 		sender.sendMessage(ChatColor.YELLOW + "Supported mappings are: ");
-		sender.sendMessage(ChatColor.YELLOW + "/pex [user/group] <USERNAME> [add/remove] <PERMISSION>");
-		sender.sendMessage(ChatColor.YELLOW + "/pex [user/group] <USERNAME> [prefix/suffix] <PREFIX>");
-		sender.sendMessage(ChatColor.YELLOW + "/pex user <USERNAME> group [add/set/remove] <GROUP>");
+		sender.sendMessage(ChatColor.YELLOW + "/pex [user/group] <USERNAME/GROUP>");
+		sender.sendMessage(ChatColor.YELLOW + "/pex [user/group] <USERNAME/GROUP> [add/remove] <PERMISSION>");
+		sender.sendMessage(ChatColor.YELLOW + "/pex [user/group] <USERNAME/GROUP> [prefix/suffix] <PREFIX>");
+		sender.sendMessage(ChatColor.YELLOW + "/pex [user/group] <USERNAME/GROUP> [prefix/suffix] \"\"");
+		sender.sendMessage(ChatColor.YELLOW + "/pex user <USERNAME/GROUP> group [add/set/remove] <GROUP>");
 	}
 
 	public static String translatePermission(String permission) {

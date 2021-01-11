@@ -62,6 +62,18 @@ public class TestPexWrapper {
         }
 
         @Test
+        public void userInfo() {
+                assertEquals("luckperms user blalp info",
+                                PexWrapper.translateCommand("user blalp".split(" ")));
+        }
+
+        @Test
+        public void groupInfo() {
+                assertEquals("luckperms group admin info",
+                                PexWrapper.translateCommand("group admin".split(" ")));
+        }
+
+        @Test
         public void groupAdd() {
                 assertEquals("luckperms group manager permission set bukkit.fly",
                                 PexWrapper.translateCommand("group manager add bukkit.fly".split(" ")));

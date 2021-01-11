@@ -58,7 +58,8 @@ public class PexWrapper extends JavaPlugin {
 			} else if (args[0].equals("groups") && args[1].equals("list")) {
 				output += "listgroups";
 			}
-		} else if (args.length >= 2 && (args[0].equals("user") || args[0].equals("group"))) {
+		}
+		if (args.length >= 2 && (args[0].equals("user") || args[0].equals("group"))) {
 			// Now Start doing through the user/group related commands by length.
 			// Add user/group and name to the command
 			output += args[0] + " " + args[1] + " ";

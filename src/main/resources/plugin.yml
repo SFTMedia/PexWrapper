@@ -1,0 +1,7 @@
+name: PexWrapper
+main: com.blalp.pexwrapper.PexWrapper
+version: 1.0.0
+
+commands:
+  permissionsex:
+        aliases: [pex]
